@@ -1,0 +1,21 @@
+$light-bg: #eee;
+$dark-bg: #333;
+$light-text: black;
+$dark-text: white;
+
+%base-style {
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.highlighted {
+  @extend %base-style;
+  background-color: $dark-bg;
+  color: $dark-text;
+}
+
+.normal {
+  @extend %base-style;
+  background-color: $light-bg;
+  color: $light-text;
+}

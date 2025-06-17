@@ -1,0 +1,31 @@
+<!-- NgModel (2-way binding) -->
+<input [(ngModel)]="username" placeholder="Dein Name" />
+
+<!-- @if -->
+<p *ngIf="username">Hallo, {{ username }}!</p>
+
+<!-- @switch -->
+<ng-container [ngSwitch]="userRole">
+  <p *ngSwitchCase="'Admin'">Willkommen, Administrator.</p>
+  <p *ngSwitchDefault>Willkommen, Benutzer.</p>
+</ng-container>
+
+<!-- @for -->
+<ul>
+  <li *ngFor="let user of users">{{ user }}</li>
+</ul>
+
+<!-- (click) -->
+<button (click)="toggleVisibility()">Toggle Sichtbarkeit</button>
+<p *ngIf="isVisible">Dieser Text ist sichtbar.</p>
+
+<!-- NgClass + NgStyle -->
+<p [ngClass]="currentClasses" [ngStyle]="currentStyles">
+  Dynamisch gestylter Text
+</p>
+
+<!-- Dark Mode Toggle -->
+<label>
+  <input type="checkbox" [(ngModel)]="isDarkMode" />
+  Dark Mode aktivieren
+</label>
