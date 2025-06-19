@@ -1,0 +1,12 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "angular-app-blog-vithursen-murugaravi": {
+      "appLocation": ".",
+      "outputLocation": "dist\\angular-app-blog-vithursen-murugaravi",
+      "appBuildCommand": "npm run build",
+      "run": "npm start",
+      "appDevserverUrl": "http://localhost:4200"
+    }
+  }
+}

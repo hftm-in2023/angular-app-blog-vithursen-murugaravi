@@ -1,27 +1,23 @@
 {
   "name": "angular-app-blog-vithursen-murugaravi",
   "version": "0.0.0",
-  
   "scripts": {
-    "prepare": "husky install",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-<<<<<<< HEAD
-    "lint": "ng lint"
-=======
     "lint": "ng lint",
     "prepare": "husky install"
->>>>>>> 1564cb5 (Konfigurationsdateien hinzugefügt und aktualisiert)
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.0.3",
     "@angular/common": "^20.0.1",
     "@angular/compiler": "^20.0.1",
     "@angular/core": "^20.0.1",
     "@angular/forms": "^20.0.1",
+    "@angular/material": "^20.0.3",
     "@angular/platform-browser": "^20.0.1",
     "@angular/platform-browser-dynamic": "^20.0.1",
     "@angular/router": "^20.0.1",
@@ -31,8 +27,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@angular/build": "^20.0.1",
+    "@angular-devkit/build-angular": "^20.0.1",
     "@angular/cli": "^20.0.1",
     "@angular/compiler-cli": "^20.0.1",
     "@commitlint/cli": "^19.8.1",
@@ -42,17 +37,6 @@
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
-=======
-    "@angular-devkit/build-angular": "^20.0.1",
-    "@angular/cli": "^19.2.12",
-    "@angular/compiler-cli": "^19.2.0",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@types/jasmine": "~5.1.0",
-    "angular-eslint": "19.7.1",
-    "eslint": "^9.28.0",
-    "eslint-config-prettier": "^10.1.5",
->>>>>>> 1564cb5 (Konfigurationsdateien hinzugefügt und aktualisiert)
     "husky": "^9.1.7",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
@@ -60,28 +44,21 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-<<<<<<< HEAD
     "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
     "typescript": "~5.8.3",
     "typescript-eslint": "8.33.1"
   },
   "lint-staged": {
-  "*.{ts,js}": ["eslint --fix", "prettier --write"],
-  "*.scss": ["prettier --write"],
-  "*.html": ["prettier --write"]
-=======
-    "lint-staged": "^16.1.0",
-    "prettier": "^3.5.3",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "8.33.1"
-  },
-  "lint-staged": {
-  "*.{ts,js,json,html,css,scss}": [
-    "prettier --write",
-    "eslint --fix"
-  ]
->>>>>>> 1564cb5 (Konfigurationsdateien hinzugefügt und aktualisiert)
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.scss": [
+      "prettier --write"
+    ],
+    "*.html": [
+      "prettier --write"
+    ]
   }
-
 }
