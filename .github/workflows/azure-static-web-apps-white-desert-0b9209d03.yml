@@ -17,6 +17,10 @@ jobs:
     permissions:
        id-token: write
        contents: read
+
+    env:
+      NODE_VERSION: 20.19.1
+
     steps:
       - uses: actions/checkout@v3
         with:
