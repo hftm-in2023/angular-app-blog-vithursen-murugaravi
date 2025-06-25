@@ -1,3 +1,30 @@
-- uses: actions/checkout@v3
-  with:
-    submodules: false
+ame: Angular Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.1
+
+      - name: Install dependencies and build Angular app
+        run: |
+          npm ci
+          npm run build -- --base-href /angular-app-blog-vithursen-murugaravi/
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist/angular-app-blog-vithursen-murugaravi/browser
+          branch: prod
+          token: ${{ secrets.GITHUB_TOKEN }}
