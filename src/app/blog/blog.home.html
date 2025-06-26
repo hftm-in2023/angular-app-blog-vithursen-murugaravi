@@ -21,6 +21,9 @@
         <mat-card-actions align="end">
           <button mat-button>LIKE</button>
           <button mat-button>SHARE</button>
+          <button mat-raised-button color="primary" (click)="viewBlogDetails(blog.id)">
+            Details anzeigen
+          </button>
         </mat-card-actions>
       </mat-card-footer>
     </mat-card>

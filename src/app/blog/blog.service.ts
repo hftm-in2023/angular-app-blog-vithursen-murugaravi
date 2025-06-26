@@ -15,4 +15,16 @@ export class BlogService {
       map(response => response.data)
     );
   }
+
+  getBlogById(id: number): Observable<Blog> {
+    return this.http.get<{ data: Blog[] }>(this.apiUrl).pipe(
+      map(response => {
+        const blog = response.data.find(b => b.id === id);
+        if (!blog) {
+          throw new Error(`Blog mit ID ${id} nicht gefunden`);
+        }
+        return blog;
+      })
+    );
+  }
 }

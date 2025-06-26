@@ -30,7 +30,12 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "optimization": {
+              "scripts": true,
+              "styles": true,
+              "fonts": true
+            }
           },
           "configurations": {
             "production": {
@@ -46,7 +51,18 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": {
+                "scripts": true,
+                "styles": true,
+                "fonts": true
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/index.html",
+                  "with": "src/index.production.html"
+                }
+              ]
             },
             "development": {
               "optimization": false,

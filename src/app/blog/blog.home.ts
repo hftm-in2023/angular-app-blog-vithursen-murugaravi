@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import { Router, RouterModule } from '@angular/router';
+import { MaterialModule } from '../material.module';
 
 export type Blog = {
   author: string;
@@ -19,8 +19,14 @@ export type Blog = {
   templateUrl: './blog.home.html',
   styleUrls: ['./blog.home.scss'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule]
+  imports: [CommonModule, MaterialModule, RouterModule]
 })
 export class HomeComponent {
   @Input({ required: true }) blogs!: Blog[];
+
+  constructor(private router: Router) {}
+
+  viewBlogDetails(blogId: number) {
+    this.router.navigate(['/blog', blogId]);
+  }
 }

@@ -5,6 +5,8 @@
     <title>AngularAppBlogVithursenMurugaravi</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- CSP für Entwicklung - in Produktion sollte 'unsafe-eval' entfernt werden -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://d-cap-blog-backend---v2.whitepond-b96fee4b.westeurope.azurecontainerapps.io;">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
   <body>
