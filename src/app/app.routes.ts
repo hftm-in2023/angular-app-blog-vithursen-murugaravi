@@ -1,8 +1,14 @@
 import { Routes } from '@angular/router';
-import { BlogDetailComponent } from './blog/blog-detail.component';
-import { HomePageComponent } from './home/home.component';
 
 export const routes: Routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'blog/:id', component: BlogDetailComponent }
+  {
+    path: '',
+    loadComponent: () => import('./home/home.component').then(m => m.HomePageComponent),
+    data: { preload: true }
+  },
+  {
+    path: 'blog/:id',
+    loadComponent: () => import('./blog/blog-detail.component').then(m => m.BlogDetailComponent),
+    data: { preload: true }
+  }
 ];

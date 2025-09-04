@@ -1,69 +1,14 @@
-<div class="blog-detail-container">
-  <div class="back-button-container">
-    <button mat-button color="primary" (click)="goBack()">
-      
-      Zurück zur Übersicht
-    </button>
-  </div>
+<ng-container *ngIf="!(loading()); else loadingTpl">
+  <app-blog-detail-view 
+    [blog]="blog()" 
+    [loading]="loading()" 
+    [error]="error()" 
+    (back)="goBack()"
+    (like)="onLike()"
+    (comment)="onComment()"
+  ></app-blog-detail-view>
+</ng-container>
 
-  <div *ngIf="error" class="error-container">
-    <mat-card>
-      <mat-card-content>
-        <p class="error-message">{{ error }}</p>
-        <button mat-raised-button color="primary" (click)="goBack()">
-          Zurück zur Übersicht
-        </button>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div *ngIf="blog" class="blog-content">
-    <mat-card class="blog-card">
-      <mat-card-header>
-        <mat-card-title class="blog-title">{{ blog.title }}</mat-card-title>
-        <mat-card-subtitle class="blog-subtitle">
-          <span class="author">Von {{ blog.author }}</span>
-        </mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content class="blog-body">
-        <div class="blog-info">
-          <div class="blog-id">
-            <mat-chip color="primary" selected>
-              <mat-icon>tag</mat-icon>
-              Blog ID: {{ blog.id }}
-            </mat-chip>
-          </div>
-          
-          <div class="blog-stats">
-            <mat-chip color="accent" selected>
-              <mat-icon>thumb_up</mat-icon>
-              {{ blog.likes }} Likes
-            </mat-chip>
-            <mat-chip color="accent" selected>
-              <mat-icon>comment</mat-icon>
-              {{ blog.comments }} Kommentare
-            </mat-chip>
-          </div>
-        </div>
-
-        <div class="blog-content-text">
-          <h3>Inhalt:</h3>
-          <p>{{ blog.contentPreview }}</p>
-        </div>
-
-        <div class="blog-actions">
-          <button mat-raised-button color="primary" [disabled]="blog.likedByMe">
-            <mat-icon>{{ blog.likedByMe ? 'favorite' : 'favorite_border' }}</mat-icon>
-            {{ blog.likedByMe ? 'Geliked' : 'Liken' }}
-          </button>
-          
-          <button mat-raised-button color="accent">
-            <mat-icon>comment</mat-icon>
-            Kommentieren
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div> 
+<ng-template #loadingTpl>
+  <app-spinner [diameter]="64" [strokeWidth]="5" [fullscreen]="true"></app-spinner>
+</ng-template>

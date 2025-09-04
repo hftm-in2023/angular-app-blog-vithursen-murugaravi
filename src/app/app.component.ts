@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HomeComponent, Blog } from './blog/blog.home';
+import { Blog } from './blog/blog.schemas';
 import { BlogService } from './blog/blog.service';
 
 @Component({

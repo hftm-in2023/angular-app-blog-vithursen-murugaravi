@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent as BlogHomeComponent, Blog } from '../blog/blog.home';
-import { BlogService } from '../blog/blog.service';
+import { SpinnerComponent } from '../shared/spinner.component';
+import { HomeComponent } from '../blog/blog.home';
+import { Blog } from '../blog/blog.schemas';
+import { BlogStore } from '../blog/blog.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [CommonModule, BlogHomeComponent]
+  imports: [CommonModule, HomeComponent, SpinnerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit {
-  blogs: Blog[] = [];
+  blogs = this.blogStore.blogs;
+  loading = this.blogStore.loading;
 
-  constructor(private blogService: BlogService) {}
+  constructor(private blogStore: BlogStore, private router: Router) {}
 
   ngOnInit() {
-    this.blogService.getBlogs().subscribe({
-      next: (blogs) => (this.blogs = blogs),
-      error: (err) => console.error('Fehler beim Laden der Blogs:', err)
-    });
+    this.blogStore.loadBlogs();
+  }
+
+  onOpenBlog(blogId: number) {
+    this.router.navigate(['/blog', blogId]);
   }
 } 

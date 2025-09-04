@@ -1,1 +1,7 @@
-<app-home [blogs]="blogs"></app-home> 
+<ng-container *ngIf="!(loading()); else loadingTpl">
+  <app-home [blogs]="blogs()" (openBlog)="onOpenBlog($event)"></app-home>
+</ng-container>
+
+<ng-template #loadingTpl>
+  <app-spinner [diameter]="64" [strokeWidth]="5" [fullscreen]="true"></app-spinner>
+</ng-template>

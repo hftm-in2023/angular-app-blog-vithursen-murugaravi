@@ -1,5 +1,5 @@
 <div class="blog-container">
-  <div *ngFor="let blog of blogs">
+  <div *ngFor="let blog of blogs()">
     <mat-card class="blog-card">
       <mat-card-header>
         <mat-card-title class="card-title">{{ blog.title }}</mat-card-title>
@@ -21,7 +21,7 @@
         <mat-card-actions align="end">
           <button mat-button>LIKE</button>
           <button mat-button>SHARE</button>
-          <button mat-raised-button color="primary" (click)="viewBlogDetails(blog.id)">
+          <button mat-raised-button color="primary" (click)="onOpenBlog(blog.id)">
             Details anzeigen
           </button>
         </mat-card-actions>
