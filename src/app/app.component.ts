@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { GlobalLoadingComponent } from './shared/global-loading.component';
 import { Blog } from './blog/blog.schemas';
 import { BlogService } from './blog/blog.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule],
+  imports: [RouterModule, GlobalLoadingComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
