@@ -6,12 +6,10 @@
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- CSP für Entwicklung - in Produktion sollte 'unsafe-eval' entfernt werden -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://d-cap-blog-backend---v2.whitepond-b96fee4b.westeurope.azurecontainerapps.io;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://d-cap-blog-backend---v2.whitepond-b96fee4b.westeurope.azurecontainerapps.io https://d-cap-keycloak.kindbay-711f60b2.westeurope.azurecontainerapps.io; frame-src 'self' https://d-cap-keycloak.kindbay-711f60b2.westeurope.azurecontainerapps.io;">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
   <body>
     <app-root></app-root>
-    <!-- Silent renew support for angular-auth-oidc-client -->
-    <iframe id="silentRenew" title="silent renew" width="0" height="0" style="position: absolute; left: -1000px; top: -1000px;" src="/silent-renew.html"></iframe>
   </body>
 </html>

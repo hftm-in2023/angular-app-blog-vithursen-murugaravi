@@ -14,5 +14,3 @@ export function extractRoles(userData: unknown, clientId?: string): string[] {
 export function hasRole(userData: unknown, role: string, clientId?: string): boolean {
   return extractRoles(userData, clientId).includes(role);
 }
-
-

@@ -23,5 +23,3 @@ export { BlogEntriesResponseSchema as BlogListResponseSchema };
 export type Blog = z.infer<typeof BlogSchema>;
 export type BlogEntriesResponse = z.infer<typeof BlogEntriesResponseSchema>;
 export type BlogListResponse = BlogEntriesResponse;
-
-

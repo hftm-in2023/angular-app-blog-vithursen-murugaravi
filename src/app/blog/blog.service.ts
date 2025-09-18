@@ -31,4 +31,13 @@ export class BlogService {
       })
     );
   }
+
+  createBlog(blogData: { title: string; content: string }): Observable<Blog> {
+    const createUrl = 'https://d-cap-blog-backend---v2.whitepond-b96fee4b.westeurope.azurecontainerapps.io/entries';
+    return this.http.post<Blog>(createUrl, blogData);
+  }
+
+  addBlog(blogData: { title: string; content: string }): Observable<Blog> {
+    return this.createBlog(blogData);
+  }
 }

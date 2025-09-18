@@ -1,0 +1,9 @@
+<section style="padding:24px">
+  <h1>Add Blog</h1>
+  <app-blog-form
+    [form]="formTyped"
+    [loading]="loading()"
+    (submit)="onSubmit()"
+    (reset)="onReset()">
+  </app-blog-form>
+</section>

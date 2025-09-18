@@ -1,0 +1,14 @@
+{
+  "/auth/*": {
+    "target": "https://d-cap-keycloak.kindbay-711f60b2.westeurope.azurecontainerapps.io",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/realms/*": {
+    "target": "https://d-cap-keycloak.kindbay-711f60b2.westeurope.azurecontainerapps.io",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

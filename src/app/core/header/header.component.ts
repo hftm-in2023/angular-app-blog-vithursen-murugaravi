@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal, OnInit, O
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { OidcSecurityService, LoginResponse } from 'angular-auth-oidc-client';
-import { hasRole } from '../auth/roles';
+import { hasRole } from '../../features/auth/roles';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -45,27 +45,39 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // Subscribe to authentication state changes
     this.oidc.isAuthenticated$.pipe(
       takeUntil(this.destroy$)
-    ).subscribe((isAuthenticated) => {
-      if (isAuthenticated) {
-        this.oidc.getUserData().pipe(
-          takeUntil(this.destroy$)
-        ).subscribe((userData) => {
+    ).subscribe({
+      next: (isAuthenticated) => {
+        console.log('Header: Authentication state changed:', isAuthenticated);
+        if (isAuthenticated) {
+          this.oidc.getUserData().pipe(
+            takeUntil(this.destroy$)
+          ).subscribe({
+            next: (userData) => {
+              console.log('Header: User data received:', userData);
+              this.authState.set({
+                isAuthenticated: true,
+                userData,
+                accessToken: '',
+                idToken: '',
+                configId: 'default'
+              } as LoginResponse);
+            },
+            error: (error) => {
+              console.error('Header: Error getting user data:', error);
+            }
+          });
+        } else {
           this.authState.set({
-            isAuthenticated: true,
-            userData,
+            isAuthenticated: false,
+            userData: null,
             accessToken: '',
             idToken: '',
             configId: 'default'
           } as LoginResponse);
-        });
-      } else {
-        this.authState.set({
-          isAuthenticated: false,
-          userData: null,
-          accessToken: '',
-          idToken: '',
-          configId: 'default'
-        } as LoginResponse);
+        }
+      },
+      error: (error) => {
+        console.error('Header: Error in authentication state:', error);
       }
     });
   }
@@ -77,11 +89,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   login() {
     console.log('Login button clicked, calling oidc.authorize()');
-    this.oidc.authorize();
+    try {
+      this.oidc.authorize();
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   }
 
   logout() {
-    this.oidc.logoff().subscribe();
+    console.log('Logout button clicked, calling oidc.logoff()');
+    this.oidc.logoff().subscribe({
+      next: (result) => {
+        console.log('Logout successful:', result);
+        // Force state update
+        this.authState.set({
+          isAuthenticated: false,
+          userData: null,
+          accessToken: '',
+          idToken: '',
+          configId: 'default'
+        } as LoginResponse);
+      },
+      error: (error) => {
+        console.error('Logout error:', error);
+      }
+    });
   }
 }
 

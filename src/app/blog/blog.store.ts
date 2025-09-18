@@ -7,12 +7,16 @@ type BlogState = {
   blogs: Blog[];
   loading: boolean;
   error: string | null;
+  creating: boolean;
 };
 
 type BlogAction =
   | { type: 'LOAD_BLOGS' }
   | { type: 'LOAD_BLOGS_SUCCESS'; blogs: Blog[] }
-  | { type: 'LOAD_BLOGS_FAILURE'; error: string };
+  | { type: 'LOAD_BLOGS_FAILURE'; error: string }
+  | { type: 'CREATE_BLOG'; blog: { title: string; content: string } }
+  | { type: 'CREATE_BLOG_SUCCESS'; blog: Blog }
+  | { type: 'CREATE_BLOG_FAILURE'; error: string };
 
 @Injectable({ providedIn: 'root' })
 export class BlogStore {
@@ -20,6 +24,7 @@ export class BlogStore {
     blogs: [],
     loading: false,
     error: null,
+    creating: false,
   };
 
   private readonly action$ = new Subject<BlogAction>();
@@ -31,6 +36,7 @@ export class BlogStore {
   readonly blogs = computed(() => this.state().blogs);
   readonly loading = computed(() => this.state().loading);
   readonly error = computed(() => this.state().error);
+  readonly creating = computed(() => this.state().creating);
 
   constructor(private readonly blogService: BlogService) {
     // Effect: respond to actions
@@ -52,6 +58,14 @@ export class BlogStore {
     });
   }
 
+  createBlog(blogData: { title: string; content: string }) {
+    this.dispatch({ type: 'CREATE_BLOG', blog: blogData });
+    this.blogService.createBlog(blogData).subscribe({
+      next: (blog) => this.dispatch({ type: 'CREATE_BLOG_SUCCESS', blog }),
+      error: (err) => this.dispatch({ type: 'CREATE_BLOG_FAILURE', error: String(err?.message || err) })
+    });
+  }
+
   // Reducer
   private reduce(action: BlogAction) {
     const current = this.state();
@@ -61,11 +75,28 @@ export class BlogStore {
         break;
       }
       case 'LOAD_BLOGS_SUCCESS': {
-        this.state.set({ blogs: action.blogs, loading: false, error: null });
+        this.state.set({ blogs: action.blogs, loading: false, error: null, creating: false });
         break;
       }
       case 'LOAD_BLOGS_FAILURE': {
         this.state.set({ ...current, loading: false, error: action.error });
+        break;
+      }
+      case 'CREATE_BLOG': {
+        this.state.set({ ...current, creating: true, error: null });
+        break;
+      }
+      case 'CREATE_BLOG_SUCCESS': {
+        this.state.set({ 
+          blogs: [...current.blogs, action.blog], 
+          loading: false,
+          creating: false, 
+          error: null 
+        });
+        break;
+      }
+      case 'CREATE_BLOG_FAILURE': {
+        this.state.set({ ...current, creating: false, error: action.error });
         break;
       }
     }

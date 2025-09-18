@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { isAuthenticatedGuard } from './core/auth/is-authenticated.guard';
+import { mockAuthGuard } from './core/auth/mock-auth.guard';
 
 export const routes: Routes = [
   {
@@ -15,6 +15,6 @@ export const routes: Routes = [
   {
     path: 'add-blog',
     loadChildren: () => import('./features/add-blog-page/add-blog-page.routes').then(m => m.addBlogPageRoutes),
-    canActivate: [isAuthenticatedGuard]
+    canActivate: [mockAuthGuard]
   }
 ];

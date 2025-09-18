@@ -1,0 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="submit.emit()" (reset)="reset.emit()">
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <mat-form-field>
+      <mat-label>Titel</mat-label>
+      <input matInput formControlName="title">
+      <mat-error *ngIf="form.get('title')?.hasError('required')">Titel ist erforderlich.</mat-error>
+      <mat-error *ngIf="form.get('title')?.hasError('minlength')">Titel muss mindestens 3 Zeichen lang sein.</mat-error>
+      <mat-error *ngIf="form.get('title')?.hasError('titleTaken')">Dieser Titel existiert bereits.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Inhalt</mat-label>
+      <textarea matInput formControlName="content" rows="5"></textarea>
+      <mat-error *ngIf="form.get('content')?.hasError('required')">Inhalt ist erforderlich.</mat-error>
+      <mat-error *ngIf="form.get('content')?.hasError('minlength')">Inhalt muss mindestens 10 Zeichen lang sein.</mat-error>
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: flex-end; gap: 8px;">
+      <button mat-stroked-button type="reset" [disabled]="loading">Zurücksetzen</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || loading">
+        <span *ngIf="!loading">Speichern</span>
+        <app-spinner *ngIf="loading" [diameter]="20" [strokeWidth]="3"></app-spinner>
+      </button>
+    </div>
+  </div>
+</form>

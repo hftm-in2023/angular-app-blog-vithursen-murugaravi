@@ -1,0 +1,50 @@
+:host {
+display: block;
+padding-top: 64px; /* falls Toolbar fixed ist */
+}
+
+
+.blog-input {
+display: flex;
+flex-direction: column;
+margin-left: auto;
+margin-right: auto;
+width: 80%;
+}
+
+
+.blog-input mat-form-field {
+margin-top: 10px;
+width: 100%;
+}
+
+
+.button-group {
+display: flex;
+gap: 12px;
+align-items: center;
+margin-bottom: 12px;
+}
+
+
+.submit-button {
+min-width: 180px;
+}
+
+
+.error-message {
+padding: 1rem;
+margin: 1rem 0;
+color: var(--mat-sys-error, #b00020);
+background-color: var(--mat-sys-error-container, #fcebea);
+display: flex;
+gap: 8px;
+align-items: center;
+}
+
+
+.spinner-container {
+display: flex;
+justify-content: center;
+margin-top: 12px;
+}
